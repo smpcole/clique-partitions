@@ -8,7 +8,7 @@ namespace clique_partitions {
 	/*
 	 * Return true iff. perm is an s-clique partition in G
 	 */
-	bool is_clique_partition(const int *const perm, const bool *const*const G, const size_t n, const size_t s);
+	bool is_clique_partition(const size_t *const perm, const bool *const*const G, const size_t n, const size_t s);
 
 	bool has_clique_partition(const bool *const*const G, const size_t n, const size_t s);
 

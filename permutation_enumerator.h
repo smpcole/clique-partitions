@@ -11,7 +11,7 @@ namespace clique_partitions {
 		void *pvt;
 	public:
 		
-		permutation_enumerator(const size_t n, int *const a = NULL);
+		permutation_enumerator(const size_t n, size_t *const a = NULL);
 		~permutation_enumerator();
 		
 		/*
@@ -24,13 +24,13 @@ namespace clique_partitions {
 		 *
 		 * If you get the pointer in this way you're not allowed to modify the array.
 		 */
-		const int *get_array();
+		const size_t *get_array();
 		
 		/*
 		 * Increment array to next permutaion;
 		 * for convenience, return a pointer to the array
 		 */
-		const int *next();
+		const size_t *next();
 		
 		void print_curr(std::ostream &out = std::cout);
 	};

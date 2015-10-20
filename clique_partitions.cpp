@@ -26,7 +26,7 @@ namespace clique_partitions {
 		return N;
 	}
 
-	bool is_clique_partition(const int *const perm, const bool *const*const G, const size_t n, const size_t s) {
+	bool is_clique_partition(const size_t *const perm, const bool *const*const G, const size_t n, const size_t s) {
 		assert(!(n % s));
 		size_t start = 0;
 		while(start < n) {

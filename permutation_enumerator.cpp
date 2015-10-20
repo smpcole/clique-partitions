@@ -5,14 +5,14 @@ using namespace std;
 namespace clique_partitions {
 
 	struct pvt_data {
-		int *const a;
+		size_t *const a;
 		const size_t n;
 		size_t i; // Keeps track of current index of nth element
 		bool past_end;
 		const bool owns_a;// True if a was allocated by this object
 		permutation_enumerator *child;
 
-		pvt_data(int *const nums, const size_t size, const bool owns_array) : 
+		pvt_data(size_t *const nums, const size_t size, const bool owns_array) : 
 			a(nums), 
 			n(size), 
 			child(size ? new permutation_enumerator(size - 1, a) : NULL),
@@ -31,14 +31,14 @@ namespace clique_partitions {
 		}
 	};
 
-	const int *permutation_enumerator::get_array() {
+	const size_t *permutation_enumerator::get_array() {
 		return ((pvt_data *)pvt)->a;
 	}
 	
-	permutation_enumerator::permutation_enumerator(const size_t n, int *const a) {
+	permutation_enumerator::permutation_enumerator(const size_t n, size_t *const a) {
 		// If a == NULL, then we need to create a new array and delete it when we're done
 		const bool own_array = (a == NULL);
-		int *const newa = (own_array ? new int[n] : a);
+		size_t *const newa = (own_array ? new size_t[n] : a);
 
 		// Fill in newa with the numbers 0, ..., n - 1
 		if(newa != a) {
@@ -50,7 +50,7 @@ namespace clique_partitions {
 		pvt = (void *)(new pvt_data(newa, n, own_array)); 
 	}
 
-	const int *permutation_enumerator::next() {
+	const size_t *permutation_enumerator::next() {
 		
 		if(!past_end()) {
 
@@ -59,7 +59,7 @@ namespace clique_partitions {
 			// If nth element is not at the beginning of the list
 			if(pvt->i) {
 				// Move it down an index
-				const int tmp = pvt->a[pvt->i];
+				const size_t tmp = pvt->a[pvt->i];
 				pvt->a[pvt->i] = pvt->a[pvt->i - 1];
 				pvt->i -= 1;
 				pvt->a[pvt->i] = tmp;
@@ -67,8 +67,8 @@ namespace clique_partitions {
 			else {
 
 				// Move nth element back to end
-				const int tmp = pvt->a[0];
-				for(int i = 0; i < pvt->n - 1; i++)
+				const size_t tmp = pvt->a[0];
+				for(size_t i = 0; i < pvt->n - 1; i++)
 					pvt->a[i] = pvt->a[i + 1];
 				pvt->a[pvt->n - 1] = tmp;
 				pvt->i = pvt->n - 1;
@@ -95,7 +95,7 @@ namespace clique_partitions {
 
 	void permutation_enumerator::print_curr(ostream &out) {
 		pvt_data *pvt = (pvt_data *)(this->pvt);
-		for(int i = 0; i < pvt->n; i++)
+		for(size_t i = 0; i < pvt->n; i++)
 			out << pvt->a[i];
 		out << endl;
 	}
