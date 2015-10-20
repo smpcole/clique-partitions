@@ -14,7 +14,7 @@ namespace clique_partitions {
 		return fact;
 	}
 
-	unsigned int num_partitions(size_t n, size_t k) {
+	unsigned int num_partitions(const size_t n, const size_t k) {
 		assert(!(n % k));
 		size_t s = n / k;
 		const unsigned int sfact = factorial(s);

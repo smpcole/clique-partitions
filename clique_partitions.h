@@ -16,7 +16,7 @@ namespace clique_partitions {
 
 	void test(const size_t s, const size_t k, const double p, const unsigned int num_graphs);
 
-	unsigned int num_partitions(size_t n, size_t k);
+	unsigned int num_partitions(const size_t n, const size_t k);
 
 }
 
