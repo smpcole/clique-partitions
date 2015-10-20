@@ -12,11 +12,11 @@ namespace clique_partitions {
 
 	bool has_clique_partition(const bool *const*const G, const size_t n, const size_t s);
 
-	unsigned int num_clique_partitions(const bool *const*const G, const size_t n, const size_t s);
+	unsigned long long num_clique_partitions(const bool *const*const G, const size_t n, const size_t s);
 
-	void test(const size_t s, const size_t k, const double p, const unsigned int num_graphs);
+	void test(const size_t s, const size_t k, const double p, const unsigned short num_graphs);
 
-	unsigned int num_partitions(const size_t n, const size_t k);
+	unsigned long long num_partitions(const size_t n, const size_t k);
 
 	/*
 	 * Return number of partitions of [n] into parts of equal size s,
@@ -27,7 +27,7 @@ namespace clique_partitions {
 	 * The argument and return types of s are double so that s matches most of the
 	 * functions in math.h
 	 */
-	unsigned int num_partitions(const size_t n, double (*s)(double));
+	unsigned long long num_partitions(const size_t n, double (*s)(double));
 
 	double exp_num_clique_partitions(const size_t n, const size_t k, const double p);
 

@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
 	size_t n = atoi(argv[1]);
 
-	unsigned int N = 0;
+	unsigned long long N = 0;
 	permutation_enumerator perms(n);
 	while(!perms.past_end()) {
 		cout << "Permutation " << ++N << ": ";

@@ -7,18 +7,18 @@ using namespace std;
 
 namespace clique_partitions {
 
-	inline unsigned int factorial(const unsigned int n) {
-		unsigned int fact = 1;
-		for(unsigned int i = 1; i <= n; i++)
+	inline unsigned long long factorial(const size_t n) {
+		unsigned long long fact = 1;
+		for(size_t i = 1; i <= n; i++)
 			fact *= i;
 		return fact;
 	}
 
-	unsigned int num_partitions(const size_t n, const size_t k) {
+	unsigned long long num_partitions(const size_t n, const size_t k) {
 		assert(!(n % k));
 		size_t s = n / k;
-		const unsigned int sfact = factorial(s);
-		unsigned int N = factorial(n);
+		const unsigned long long sfact = factorial(s);
+		unsigned long long N = factorial(n);
 		for(size_t i = 1; i <= k; i++) {
 			N /= i;
 			N /= sfact;
@@ -52,9 +52,9 @@ namespace clique_partitions {
 		return false;
 	}
 
-	unsigned int num_clique_partitions(const bool *const*const G, const size_t n, const size_t s) {
+	unsigned long long num_clique_partitions(const bool *const*const G, const size_t n, const size_t s) {
 		assert(!(n % s));
-		unsigned int N = 0;
+		unsigned long long N = 0;
 		permutation_enumerator perms(n);
 		while(!perms.past_end()) {
 			if(is_clique_partition(perms.get_array(), G, n, s))
@@ -64,7 +64,7 @@ namespace clique_partitions {
 
 		// We overcount each partition k!(s!)^k times
 		const size_t k = n / s;
-		unsigned int sfact = factorial(s);
+		unsigned long long sfact = factorial(s);
 		assert(!(N % sfact));
 		for(size_t i = 1; i <= k; i++) {
 			assert(!(N % i));
@@ -74,9 +74,9 @@ namespace clique_partitions {
 		return N;
 	}
 
-	unsigned int num_partitions(const size_t n, double (*s)(double)) {
+	unsigned long long num_partitions(const size_t n, double (*s)(double)) {
 		const size_t ints = (*s)(n), k = n / ints;
-		unsigned int (*np)(const size_t, const size_t) = &num_partitions;
+		unsigned long long (*np)(const size_t, const size_t) = &num_partitions;
 		return num_partitions(ints * k, k);
 	}
 
@@ -84,7 +84,7 @@ namespace clique_partitions {
 		// Raise p^(n(n / k - 1) / 2)
 		double prb = p;
 		// pwr represents the power to which p has been raised
-		unsigned int pwr = 1, maxpwr = n * (n / k - 1) / 2;
+		unsigned long long pwr = 1, maxpwr = n * (n / k - 1) / 2;
 		while(2 * pwr <= maxpwr) {
 			prb *= prb;
 			pwr *= 2;
@@ -100,13 +100,13 @@ namespace clique_partitions {
 		return (*cp)(ints * k, k, p);
 	}
 
-	void test(const size_t s, const size_t k, const double p, const unsigned int num_graphs) {
-		unsigned int totalNumPartitions, numWithPartitions;
+	void test(const size_t s, const size_t k, const double p, const unsigned short num_graphs) {
+		unsigned long long totalNumPartitions, numWithPartitions;
 		const size_t n = s * k;
 		totalNumPartitions = numWithPartitions = 0;
-		for(unsigned int i = 0; i < num_graphs; i++) {
+		for(unsigned short i = 0; i < num_graphs; i++) {
 			bool **G = new_random_graph(n, p);
-			unsigned int N = num_clique_partitions(G, n, s);
+			unsigned long long N = num_clique_partitions(G, n, s);
 			totalNumPartitions += N;
 			if(N)
 				numWithPartitions++;
