@@ -18,6 +18,17 @@ namespace clique_partitions {
 
 	unsigned int num_partitions(const size_t n, const size_t k);
 
+	/*
+	 * Return number of partitions of [n] into parts of equal size s,
+	 * where s is a function of n.
+	 * 
+	 * Will adjust n and s so that s is an integar and s divides n
+	 *
+	 * The argument and return types of s are double so that s matches most of the
+	 * functions in math.h
+	 */
+	unsigned int num_partitions(const size_t n, double (*s)(double));
+
 	double exp_num_clique_partitions(const size_t n, const size_t k, const double p);
 
 }

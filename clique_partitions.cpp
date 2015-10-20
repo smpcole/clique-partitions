@@ -74,6 +74,12 @@ namespace clique_partitions {
 		return N;
 	}
 
+	unsigned int num_partitions(const size_t n, double (*s)(double)) {
+		const size_t ints = (*s)(n), k = n / ints;
+		unsigned int (*np)(const size_t, const size_t) = &num_partitions;
+		return num_partitions(ints * k, k);
+	}
+
 	double exp_num_clique_partitions(const size_t n, const size_t k, const double p) {
 		// Raise p^(n(n / k - 1) / 2)
 		double prb = p;
