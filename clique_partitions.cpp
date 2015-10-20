@@ -74,6 +74,20 @@ namespace clique_partitions {
 		return N;
 	}
 
+	double exp_num_clique_partitions(const size_t n, const size_t k, const double p) {
+		// Raise p^(n(n / k - 1) / 2)
+		double prb = p;
+		// pwr represents the power to which p has been raised
+		unsigned int pwr = 1, maxpwr = n * (n / k - 1) / 2;
+		while(2 * pwr <= maxpwr) {
+			prb *= prb;
+			pwr *= 2;
+		}
+		while(pwr++ < maxpwr)
+			prb *= p;
+		return prb * num_partitions(n, k);		
+	}
+
 	void test(const size_t s, const size_t k, const double p, const unsigned int num_graphs) {
 		unsigned int totalNumPartitions, numWithPartitions;
 		const size_t n = s * k;

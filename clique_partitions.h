@@ -18,6 +18,8 @@ namespace clique_partitions {
 
 	unsigned int num_partitions(const size_t n, const size_t k);
 
+	double exp_num_clique_partitions(const size_t n, const size_t k, const double p);
+
 }
 
 #endif
