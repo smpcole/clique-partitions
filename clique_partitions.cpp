@@ -94,6 +94,12 @@ namespace clique_partitions {
 		return prb * num_partitions(n, k);		
 	}
 
+	double exp_num_clique_partitions(const size_t n, double (*s)(double), const double p) {
+		const size_t ints = (*s)(n), k = n / ints;
+		double (*cp)(const size_t, const size_t, const double) = &exp_num_clique_partitions;
+		return (*cp)(ints * k, k, p);
+	}
+
 	void test(const size_t s, const size_t k, const double p, const unsigned int num_graphs) {
 		unsigned int totalNumPartitions, numWithPartitions;
 		const size_t n = s * k;

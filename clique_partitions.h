@@ -31,6 +31,16 @@ namespace clique_partitions {
 
 	double exp_num_clique_partitions(const size_t n, const size_t k, const double p);
 
+	/* Return the expected number of s-clique partitions in G(n, p),
+	 * where s is a function of n.
+	 * 
+	 * Will adjust n and s so that s is an integar and s divides n
+	 *
+	 * The argument and return types of s are double so that s matches most of the
+	 * functions in math.h
+	 */	 
+	double exp_num_clique_partitions(const size_t n, double (*s)(double), const double p);
+
 }
 
 #endif
